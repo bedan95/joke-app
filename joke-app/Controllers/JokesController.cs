@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using joke_app.Data;
 using joke_app.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace joke_app.Controllers
 {
@@ -56,6 +57,7 @@ namespace joke_app.Controllers
         }
 
         // GET: Jokes/Create
+        [Authorize]
         public IActionResult Create()
         {
             return View();
@@ -129,6 +131,7 @@ namespace joke_app.Controllers
         }
 
         // GET: Jokes/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Joke == null)
@@ -149,6 +152,7 @@ namespace joke_app.Controllers
         // POST: Jokes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.Joke == null)
